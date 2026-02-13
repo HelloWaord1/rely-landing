@@ -21,25 +21,22 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
-    const s = getSession();
-    if (!s) {
-      router.replace("/login");
-      return;
-    }
-    setSession(s);
-    setReady(true);
+    getSession().then((s) => {
+      if (!s) { router.replace("/login"); return; }
+      setSession(s);
+      setReady(true);
+    });
   }, [router]);
 
   if (!ready) return null;
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
     router.replace("/");
   };
 
   return (
     <div className="min-h-screen bg-surface-secondary flex">
-      {/* Sidebar */}
       <aside className={`fixed inset-y-0 left-0 z-40 w-60 bg-surface border-r border-border transform transition-transform md:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
         <div className="h-14 flex items-center px-5 border-b border-border">
           <Link href="/" className="text-lg font-bold text-text-primary tracking-tight">Релай</Link>
@@ -48,12 +45,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           {nav.map((item) => {
             const active = pathname === item.href;
             return (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setSidebarOpen(false)}
-                className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${active ? "bg-surface-secondary text-text-primary font-medium" : "text-text-secondary hover:text-text-primary hover:bg-surface-secondary"}`}
-              >
+              <Link key={item.href} href={item.href} onClick={() => setSidebarOpen(false)}
+                className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${active ? "bg-surface-secondary text-text-primary font-medium" : "text-text-secondary hover:text-text-primary hover:bg-surface-secondary"}`}>
                 <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d={item.icon} />
                 </svg>
@@ -64,10 +57,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </nav>
       </aside>
 
-      {/* Overlay */}
       {sidebarOpen && <div className="fixed inset-0 z-30 bg-black/20 md:hidden" onClick={() => setSidebarOpen(false)} />}
 
-      {/* Main */}
       <div className="flex-1 md:ml-60">
         <header className="h-14 bg-surface border-b border-border flex items-center justify-between px-4 sm:px-6 sticky top-0 z-20">
           <div className="flex items-center gap-3">
@@ -78,9 +69,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </button>
             <span className="text-sm font-medium text-text-primary">{session?.company}</span>
           </div>
-          <button onClick={handleLogout} className="text-sm text-text-secondary hover:text-text-primary transition-colors">
-            Выйти
-          </button>
+          <button onClick={handleLogout} className="text-sm text-text-secondary hover:text-text-primary transition-colors">Выйти</button>
         </header>
         <main className="p-4 sm:p-6">{children}</main>
       </div>

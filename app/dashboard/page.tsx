@@ -19,8 +19,7 @@ export default function DashboardHome() {
   const [company, setCompany] = useState("");
 
   useEffect(() => {
-    const s = getSession();
-    if (s) setCompany(s.company);
+    getSession().then((s) => { if (s) setCompany(s.company); });
   }, []);
 
   return (
@@ -52,9 +51,7 @@ export default function DashboardHome() {
         <div className="space-y-4">
           {steps.map((step) => (
             <div key={step.num} className="flex items-start gap-4 p-4 border border-border rounded-lg hover:border-border-hover transition-colors">
-              <div className="w-8 h-8 rounded-full bg-surface-secondary border border-border flex items-center justify-center text-sm font-semibold text-text-primary shrink-0">
-                {step.num}
-              </div>
+              <div className="w-8 h-8 rounded-full bg-surface-secondary border border-border flex items-center justify-center text-sm font-semibold text-text-primary shrink-0">{step.num}</div>
               <div>
                 <div className="text-sm font-medium text-text-primary">{step.title}</div>
                 <div className="text-sm text-text-secondary mt-0.5">{step.desc}</div>

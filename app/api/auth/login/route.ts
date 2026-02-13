@@ -1,0 +1,44 @@
+import { NextRequest, NextResponse } from "next/server";
+import bcrypt from "bcryptjs";
+import { prisma } from "../../../../lib/prisma";
+import { signToken } from "../../../../lib/auth";
+
+export async function POST(req: NextRequest) {
+  try {
+    const { email, password } = await req.json();
+
+    if (!email || !password) {
+      return NextResponse.json({ error: "Заполните все поля" }, { status: 400 });
+    }
+
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user) {
+      return NextResponse.json({ error: "Неверный email или пароль" }, { status: 401 });
+    }
+
+    const valid = await bcrypt.compare(password, user.password);
+    if (!valid) {
+      return NextResponse.json({ error: "Неверный email или пароль" }, { status: 401 });
+    }
+
+    const token = signToken({ userId: user.id, email: user.email });
+
+    const res = NextResponse.json({
+      success: true,
+      user: { id: user.id, email: user.email, company: user.company },
+    });
+
+    res.cookies.set("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 7,
+      path: "/",
+    });
+
+    return res;
+  } catch (err) {
+    console.error("Login error:", err);
+    return NextResponse.json({ error: "Ошибка сервера" }, { status: 500 });
+  }
+}

@@ -1,37 +1,37 @@
 "use client";
 
-export interface User {
-  company: string;
-  phone: string;
-  email: string;
-  password: string;
+export async function register(data: { company: string; phone: string; email: string; password: string }) {
+  const res = await fetch("/api/auth/register", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  const json = await res.json();
+  if (!res.ok) throw new Error(json.error || "Ошибка регистрации");
+  return json;
 }
 
-export function register(user: User): boolean {
-  const existing = localStorage.getItem("rely_users");
-  const users: User[] = existing ? JSON.parse(existing) : [];
-  if (users.find((u) => u.email === user.email)) return false;
-  users.push(user);
-  localStorage.setItem("rely_users", JSON.stringify(users));
-  localStorage.setItem("rely_session", JSON.stringify({ email: user.email, company: user.company }));
-  return true;
+export async function login(email: string, password: string) {
+  const res = await fetch("/api/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
+  const json = await res.json();
+  if (!res.ok) throw new Error(json.error || "Ошибка входа");
+  return json;
 }
 
-export function login(email: string, password: string): boolean {
-  const existing = localStorage.getItem("rely_users");
-  const users: User[] = existing ? JSON.parse(existing) : [];
-  const user = users.find((u) => u.email === email && u.password === password);
-  if (!user) return false;
-  localStorage.setItem("rely_session", JSON.stringify({ email: user.email, company: user.company }));
-  return true;
+export async function getSession(): Promise<{ email: string; company: string } | null> {
+  try {
+    const res = await fetch("/api/auth/me");
+    if (!res.ok) return null;
+    return await res.json();
+  } catch {
+    return null;
+  }
 }
 
-export function logout() {
-  localStorage.removeItem("rely_session");
-}
-
-export function getSession(): { email: string; company: string } | null {
-  if (typeof window === "undefined") return null;
-  const s = localStorage.getItem("rely_session");
-  return s ? JSON.parse(s) : null;
+export async function logout() {
+  await fetch("/api/auth/logout", { method: "POST" });
 }
