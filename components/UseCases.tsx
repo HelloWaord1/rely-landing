@@ -2,7 +2,6 @@ import ScrollReveal from "./ScrollReveal";
 
 const cases = [
   {
-    icon: "🏭",
     title: "Склады",
     tasks: [
       "Контроль приёмки и отгрузки",
@@ -13,7 +12,6 @@ const cases = [
     result: "Сокращение потерь на 40%",
   },
   {
-    icon: "⚙️",
     title: "Производство",
     tasks: [
       "Контроль выполнения планов",
@@ -24,7 +22,6 @@ const cases = [
     result: "Рост производительности на 35%",
   },
   {
-    icon: "🏗️",
     title: "Строительство",
     tasks: [
       "Контроль сроков и этапов",
@@ -35,7 +32,6 @@ const cases = [
     result: "Соблюдение сроков в 95% случаев",
   },
   {
-    icon: "🚛",
     title: "Логистика",
     tasks: [
       "Оптимизация маршрутов",
@@ -49,42 +45,40 @@ const cases = [
 
 export default function UseCases() {
   return (
-    <section id="usecases" className="py-24 sm:py-32 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent-purple/[0.02] to-transparent" />
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="usecases" className="py-20 sm:py-28">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-sm font-medium text-accent-purple uppercase tracking-wider">Применение</span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-4 mb-6">
+          <div className="max-w-2xl mx-auto text-center mb-14">
+            <p className="text-xs font-medium text-text-tertiary uppercase tracking-widest mb-3">Применение</p>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
               Для любого физического бизнеса
             </h2>
-            <p className="text-lg text-text-secondary">
-              Rely адаптируется под специфику вашей отрасли
+            <p className="mt-4 text-text-secondary">
+              Релай адаптируется под специфику вашей отрасли
             </p>
           </div>
         </ScrollReveal>
 
         <ScrollReveal stagger>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {cases.map((c, i) => (
               <div
                 key={i}
-                className="fade-up feature-card p-8 bg-surface-raised border border-border rounded-2xl"
+                className="fade-up p-6 border border-border rounded-lg hover:border-border-hover transition-colors"
               >
-                <div className="flex items-center gap-4 mb-6">
-                  <span className="text-4xl">{c.icon}</span>
-                  <h3 className="text-2xl font-bold">{c.title}</h3>
-                </div>
-                <ul className="space-y-3 mb-6">
+                <h3 className="text-base font-semibold mb-4">{c.title}</h3>
+                <ul className="space-y-2 mb-5">
                   {c.tasks.map((t, j) => (
-                    <li key={j} className="flex items-start gap-3 text-text-secondary">
-                      <span className="text-brand-light mt-0.5">✓</span>
+                    <li key={j} className="flex items-start gap-2 text-sm text-text-secondary">
+                      <svg className="w-4 h-4 mt-0.5 text-accent-green shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                      </svg>
                       <span>{t}</span>
                     </li>
                   ))}
                 </ul>
                 <div className="pt-4 border-t border-border">
-                  <span className="text-accent-green font-semibold">{c.result}</span>
+                  <span className="text-sm font-medium text-accent-green">{c.result}</span>
                 </div>
               </div>
             ))}

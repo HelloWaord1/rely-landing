@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Rely — AI-менеджер для физических бизнесов",
+  title: "Релай — AI-менеджер для физических бизнесов",
   description:
-    "Персональный AI-менеджер, который звонит сотрудникам, контролирует процессы 24/7, подключается к дронам и камерам. Для складов, производства и строительства.",
+    "AI-менеджер для складов, производства и строительства. Голосовые звонки сотрудникам, контроль через камеры и дроны, автоматические отчёты 24/7.",
   keywords:
-    "AI менеджер, управление бизнесом, автоматизация, склад, производство, строительство, голосовые звонки, дроны",
+    "AI менеджер, управление бизнесом, автоматизация, склад, производство, строительство",
   openGraph: {
-    title: "Rely — AI-менеджер для физических бизнесов",
+    title: "Релай — AI-менеджер для физических бизнесов",
     description:
-      "Персональный AI-менеджер: голосовые звонки, контроль 24/7, дроны и камеры.",
+      "AI-менеджер: голосовые звонки, контроль 24/7, камеры и дроны.",
     type: "website",
     locale: "ru_RU",
   },
@@ -25,6 +25,10 @@ export default function RootLayout({
     <html lang="ru">
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
       </head>
       <body className="antialiased">{children}</body>
     </html>

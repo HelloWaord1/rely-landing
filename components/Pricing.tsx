@@ -37,7 +37,7 @@ const plans = [
     name: "Корпорация",
     price: "По запросу",
     period: "",
-    desc: "Для крупных предприятий с особыми требованиями",
+    desc: "Для крупных предприятий",
     features: [
       "Безлимит сотрудников",
       "Безлимитные звонки",
@@ -55,56 +55,58 @@ const plans = [
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="py-24 sm:py-32">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="pricing" className="py-20 sm:py-28 bg-surface-secondary">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-sm font-medium text-accent-green uppercase tracking-wider">Тарифы</span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-4 mb-6">
+          <div className="max-w-2xl mx-auto text-center mb-14">
+            <p className="text-xs font-medium text-text-tertiary uppercase tracking-widest mb-3">Тарифы</p>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
               Прозрачные цены
             </h2>
-            <p className="text-lg text-text-secondary">
-              14 дней бесплатно на любом тарифе. Без привязки карты.
+            <p className="mt-4 text-text-secondary">
+              14 дней бесплатно. Без привязки карты.
             </p>
           </div>
         </ScrollReveal>
 
         <ScrollReveal stagger>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
             {plans.map((p, i) => (
               <div
                 key={i}
-                className={`fade-up relative p-8 rounded-2xl border transition-all ${
+                className={`fade-up relative p-6 rounded-lg border transition-colors ${
                   p.popular
-                    ? "pricing-popular border-brand/40 scale-[1.02]"
-                    : "bg-surface-raised border-border"
+                    ? "bg-surface border-text-primary"
+                    : "bg-surface border-border hover:border-border-hover"
                 }`}
               >
                 {p.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-brand text-white text-xs font-semibold rounded-full">
+                  <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-text-primary text-white text-xs font-medium rounded-full">
                     Популярный
                   </div>
                 )}
-                <h3 className="text-2xl font-bold mb-2">{p.name}</h3>
-                <p className="text-text-secondary text-sm mb-6">{p.desc}</p>
-                <div className="mb-6">
-                  <span className="text-4xl font-bold">{p.price}</span>
-                  <span className="text-text-secondary"> ₽{p.period}</span>
+                <h3 className="text-lg font-semibold mb-1">{p.name}</h3>
+                <p className="text-sm text-text-tertiary mb-4">{p.desc}</p>
+                <div className="mb-5">
+                  <span className="text-3xl font-bold">{p.price}</span>
+                  {p.period && <span className="text-text-tertiary"> ₽{p.period}</span>}
                 </div>
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-2.5 mb-6">
                   {p.features.map((f, j) => (
-                    <li key={j} className="flex items-start gap-3 text-sm">
-                      <span className="text-accent-green mt-0.5">✓</span>
+                    <li key={j} className="flex items-start gap-2 text-sm">
+                      <svg className="w-4 h-4 mt-0.5 text-accent-green shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                      </svg>
                       <span className="text-text-secondary">{f}</span>
                     </li>
                   ))}
                 </ul>
                 <a
                   href="mailto:info@rely.ai"
-                  className={`block text-center py-3 px-6 rounded-xl font-semibold transition-all ${
+                  className={`block text-center py-2.5 px-5 rounded-lg text-sm font-medium transition-all ${
                     p.popular
-                      ? "bg-brand text-white hover:bg-brand-dark glow-brand"
-                      : "bg-surface-overlay border border-border text-text-primary hover:bg-surface-raised"
+                      ? "bg-text-primary text-white hover:opacity-90"
+                      : "border border-border text-text-primary hover:border-border-hover"
                   }`}
                 >
                   {p.cta}
