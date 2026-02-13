@@ -26,7 +26,8 @@ export async function getSession(): Promise<{ email: string; company: string } |
   try {
     const res = await fetch("/api/auth/me");
     if (!res.ok) return null;
-    return await res.json();
+    const data = await res.json();
+    return data.user;
   } catch {
     return null;
   }
