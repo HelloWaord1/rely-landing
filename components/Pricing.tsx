@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ScrollReveal from "./ScrollReveal";
 
 const plans = [
@@ -105,8 +106,8 @@ export default function Pricing() {
                     </li>
                   ))}
                 </ul>
-                <a
-                  href="mailto:info@rely.ai"
+                <Link
+                  href="/register"
                   className={`block text-center py-2.5 px-5 rounded-lg text-sm font-medium transition-all ${
                     p.popular
                       ? "bg-text-primary text-white hover:opacity-90"
@@ -114,7 +115,7 @@ export default function Pricing() {
                   }`}
                 >
                   {p.cta}
-                </a>
+                </Link>
               </div>
             ))}
           </div>

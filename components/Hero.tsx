@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Hero() {
   return (
     <section className="pt-32 pb-20 sm:pt-40 sm:pb-28">
@@ -13,12 +15,12 @@ export default function Hero() {
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
-          <a
-            href="#pricing"
+          <Link
+            href="/register"
             className="px-6 py-3 bg-text-primary text-white font-medium rounded-lg hover:opacity-90 transition-opacity text-sm"
           >
             Начать бесплатно
-          </a>
+          </Link>
           <a
             href="#solution"
             className="px-6 py-3 border border-border text-text-primary font-medium rounded-lg hover:border-border-hover transition-colors text-sm"

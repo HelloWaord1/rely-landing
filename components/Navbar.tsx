@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 
 const links = [
   { href: "#problem", label: "Проблема" },
@@ -31,12 +32,18 @@ export default function Navbar() {
                 {l.label}
               </a>
             ))}
-            <a
-              href="#pricing"
+            <Link
+              href="/login"
+              className="text-sm text-text-secondary hover:text-text-primary transition-colors"
+            >
+              Войти
+            </Link>
+            <Link
+              href="/register"
               className="px-4 py-2 bg-text-primary text-white text-sm font-medium rounded-lg hover:opacity-90 transition-opacity"
             >
-              Попробовать
-            </a>
+              Регистрация
+            </Link>
           </div>
 
           <button
@@ -65,6 +72,12 @@ export default function Navbar() {
                 {l.label}
               </a>
             ))}
+            <Link href="/login" onClick={() => setOpen(false)} className="block px-3 py-2 text-sm text-text-secondary hover:text-text-primary transition-colors">
+              Войти
+            </Link>
+            <Link href="/register" onClick={() => setOpen(false)} className="block px-3 py-2 text-sm font-medium text-text-primary">
+              Регистрация
+            </Link>
           </div>
         )}
       </div>
