@@ -13,7 +13,7 @@ const plans = [
       "1 камера",
       "Email поддержка",
     ],
-    cta: "Начать бесплатно",
+    cta: "Попробовать бесплатно",
     popular: false,
   },
   {
@@ -64,8 +64,11 @@ export default function Pricing() {
               Прозрачные цены
             </h2>
             <p className="mt-4 text-text-secondary">
-              14 дней бесплатно. Без привязки карты.
+              Без привязки карты. Отмена в любой момент.
             </p>
+            <div className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 bg-accent-green/10 border border-accent-green/20 rounded-lg">
+              <span className="text-sm font-semibold text-accent-green">Первый месяц — бесплатно на всех тарифах</span>
+            </div>
           </div>
         </ScrollReveal>
 
@@ -87,10 +90,11 @@ export default function Pricing() {
                 )}
                 <h3 className="text-lg font-semibold mb-1">{p.name}</h3>
                 <p className="text-sm text-text-tertiary mb-4">{p.desc}</p>
-                <div className="mb-5">
+                <div className="mb-2">
                   <span className="text-3xl font-bold">{p.price}</span>
                   {p.period && <span className="text-text-tertiary"> ₽{p.period}</span>}
                 </div>
+                <p className="text-xs font-medium text-accent-green mb-5">30 дней бесплатно</p>
                 <ul className="space-y-2.5 mb-6">
                   {p.features.map((f, j) => (
                     <li key={j} className="flex items-start gap-2 text-sm">
