@@ -4,7 +4,7 @@ import { verifyToken } from "../../../../lib/jwt";
 
 export async function GET() {
   const cookieStore = await cookies();
-  const token = cookieStore.get("rely_token")?.value;
+  const token = cookieStore.get("token")?.value;
 
   if (!token) {
     return NextResponse.json({ error: "Не авторизован" }, { status: 401 });
